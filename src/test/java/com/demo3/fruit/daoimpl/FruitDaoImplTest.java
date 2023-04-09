@@ -14,11 +14,9 @@ public class FruitDaoImplTest {
         FruitDaoImpl fruitDao = new FruitDaoImpl();
 
         Fruit orange = new Fruit(1, "ggagaga", 12, 32, null);
-        try {
+
             int add = fruitDao.add(orange);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
 
     }
 

@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/addfruit")
+@WebServlet("/add.do")
 public class AddServlet extends HttpServlet {
 
     FruitDaoImpl fruitDao = new FruitDaoImpl();
@@ -27,11 +27,13 @@ public class AddServlet extends HttpServlet {
 
         Fruit fruit = new Fruit(1, fname, price, fcount, remark);
         System.out.println(fruit);
-        try {
-            fruitDao.add(fruit);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        int add = fruitDao.add(fruit);
+
+        if (add > 0){
+            response.sendRedirect(request.getContextPath() + "/findallfruit");
         }
+
+
     }
 
     @Override

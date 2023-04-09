@@ -3,3 +3,7 @@ function delFruit(fid){
         window.location.href='del.do?fid='+fid;
     }
 }
+
+function page(pageno){
+    window.location.href="findallfruit?pageno="+pageno;
+}

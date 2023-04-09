@@ -15,14 +15,25 @@ public class FindAllServlet extends ViewBaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        try {
-            List<Fruit> fruits = fruitDao.findall(Fruit.class);
-            fruits.forEach(System.out :: println);
-            HttpSession session = request.getSession();
-            session.setAttribute("fruitList", fruits);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        Integer pageno = 1;
+
+        String pagenostr = request.getParameter("pageno");
+
+        if(pagenostr!=null){
+            pageno = Integer.parseInt(pagenostr);
         }
+        HttpSession session = request.getSession();
+        session.setAttribute("pageno", pageno);
+
+        int fruitCount = fruitDao.getFruitCount();
+
+        System.out.println(fruitCount);
+
+        session.setAttribute("pageCount", (fruitCount+5-1)/5);
+
+        List<Fruit> fruits = fruitDao.findall(Fruit.class,pageno);
+        fruits.forEach(System.out :: println);
+        session.setAttribute("fruitList", fruits);
 
         //会将逻辑视图对应到物理视图上
         //逻辑视图：index

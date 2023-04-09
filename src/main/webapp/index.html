@@ -16,6 +16,7 @@
                 <th class="w20">名称1</th>
                 <th class="w20">单价</th>
                 <th class="w20">库存</th>
+                <th class="w20">备注</th>
                 <th>操作</th>
             </tr>
             <tr th:if="${#lists.isEmpty(session.fruitList)}">
@@ -26,10 +27,19 @@
                 <td><a th:text="${fruit.fname}" th:href="@{/edit.do(fid=${fruit.fid})}">苹果</a></td>
                 <td th:text="${fruit.price}">5</td>
                 <td th:text="${fruit.fcount}">20</td>
+                <td th:text="${fruit.remark}"></td>
                 <!-- <td><img src="imgs/del.jpg" class="delImg" th:onclick="'delFruit('+${fruit.fid}+')'"/></td> -->
                 <td><img src="imgs/del.jpg" class="delImg" th:onclick="|delFruit(${fruit.fid})|"/></td>
             </tr>
         </table>
+        <div style="width: 60%;margin-left: 42%;border: 0px solid red;padding-top: 4px" class="center">
+            <div class="center">
+                <button th:onclick="|page(1)|">首 页</button>
+                <button th:onclick="|page(${session.pageno-1})|" th:disabled="${session.pageno==1}">上一页</button>
+                <button th:onclick="|page(${session.pageno+1})|" th:disabled="${session.pageno==session.pageCount}">下一页</button>
+                <button th:onclick="|page(${session.pageCount})|">尾 页</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>
