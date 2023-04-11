@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class Fruit {
 
-    private int fid;
+    private Integer fid;
     private String fname;
     private double price;
-    private int fcount;
+    private Integer fcount;
     private String remark;
 
     public Fruit() {
     }
 
-    public Fruit(int fid, String fname, double price, int fcount, String remark) {
+    public Fruit(Integer fid, String fname, double price, Integer fcount, String remark) {
         this.fid = fid;
         this.fname = fname;
         this.price = price;
@@ -22,11 +22,11 @@ public class Fruit {
         this.remark = remark;
     }
 
-    public int getFid() {
+    public Integer getFid() {
         return fid;
     }
 
-    public void setFid(int fid) {
+    public void setFid(Integer fid) {
         this.fid = fid;
     }
 
@@ -46,11 +46,11 @@ public class Fruit {
         this.price = price;
     }
 
-    public int getFcount() {
+    public Integer getFcount() {
         return fcount;
     }
 
-    public void setFcount(int fcount) {
+    public void setFcount(Integer fcount) {
         this.fcount = fcount;
     }
 

@@ -9,21 +9,21 @@ import java.util.List;
 public interface FruitDao {
 
     //增
-    public int add(Fruit fruit);
+    public int add(Fruit fruit) throws SQLException;
 
     //删
-    public int delete(int fid);
+    public int delete(int fid) throws SQLException;
 
     //改
-    public int update(String fname, double price,int fconut,String remark) throws SQLException;
+    public int update(Fruit fruit) throws SQLException;
 
     //查一
-    public <T> T findOne(Class<T> tClass,int fid) throws Exception;
+    public Fruit findOne(Integer fid) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     //查全部
-    public <T> List<T> findall(Class<T> tClass,int pageno) throws Exception;
+    public <T> List<T> findall(Class<T> tClass,int pageno,String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
-    public <T> List<T> findall(Class<T> tClass);
-    public int getFruitCount();
+    public <T> List<T> findall(Class<T> tClass,String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    public int getFruitCount(String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
 }

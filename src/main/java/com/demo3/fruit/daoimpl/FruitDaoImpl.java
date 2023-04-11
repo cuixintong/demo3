@@ -7,10 +7,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FruitDaoImpl extends BaseDao implements FruitDao{
+public class FruitDaoImpl extends BaseDao implements FruitDao {
 
     @Override
-    public int add(Fruit fruit){
+    public int add(Fruit fruit) throws SQLException {
         String fname = fruit.getFname();
         double price = fruit.getPrice();
         int fcount = fruit.getFcount();
@@ -18,67 +18,48 @@ public class FruitDaoImpl extends BaseDao implements FruitDao{
 
         String sql = "insert into t_fruit values (null,?,?,?,?);";
 
-        try {
-            return  super.update(sql, fname, price, fcount, remark);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return  super.update(sql, fname, price, fcount, remark);
 
     }
 
     @Override
-    public int delete(int fid) {
+    public int delete(int fid) throws SQLException {
         String sql = "delete from t_fruit where fid =?;";
-        try {
-            return super.update(sql, fid);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return super.update(sql, fid);
+
     }
 
     @Override
-    public int update(String fname, double price,int fcount,String remark) {
-        String sql = "update t_fruit set price = ? , fcount = ? , remark = ? where fname = ?;";
-        try {
-            return super.update(sql, price, fcount,remark,fname);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public int update(Fruit fruit) throws SQLException {
+        String sql = "update t_fruit set fname = ?, price = ? , fcount = ? , remark = ? where fid = ?;";
+        return super.update(sql, fruit.getFname(),fruit.getPrice(), fruit.getFcount(),fruit.getRemark(),fruit.getFid());
+
     }
 
     @Override
-    public <T> T findOne(Class<T> tClass,int fid) {
+    public Fruit findOne(Integer fid) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String sql = "select * from t_fruit where fid =?;";
-        try {
-            return super.queryOne(tClass,sql,fid);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return super.queryOne(Fruit.class,sql,fid);
+
     }
 
     @Override
-    public <T> List<T> findall(Class<T> tClass,int pageno) {
-        String sql = "select * from t_fruit limit ? , 5;";
-        try {
-            return super.queryAll(tClass,sql,(pageno-1)*5);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public <T> List<T> findall(Class<T> tClass,int pageno,String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String sql = "select * from t_fruit where fname like ? or remark like ? limit ? , 5;";
+        return super.queryAll(tClass,sql,"%"+keyword+"%","%"+keyword+"%",(pageno-1)*5);
+
     }
 
     @Override
-    public <T> List<T> findall(Class<T> tClass) {
-        String sql = "select * from t_fruit;";
-        try {
-            return super.queryAll(tClass,sql);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public <T> List<T> findall(Class<T> tClass,String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String sql = "select * from t_fruit where fname like ? or remark like ?;";
+        return super.queryAll(tClass,sql,"%"+keyword+"%","%"+keyword+"%");
+
     }
 
     @Override
-    public int getFruitCount(){
-        List<Fruit> findall = findall(Fruit.class);
+    public int getFruitCount(String keyword) throws SQLException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<Fruit> findall = findall(Fruit.class,keyword);
         return findall.size();
     }
 }

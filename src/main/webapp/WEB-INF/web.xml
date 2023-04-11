@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
     <context-param>
         <param-name>view-prefix</param-name>
         <param-value>/</param-value>
@@ -12,14 +13,21 @@
         <param-value>.html</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>applicationContext</param-name>
+        <param-value>applicationContext.xml</param-value>
+    </context-param>
+
+
+
 <!--    <servlet>-->
 <!--        <servlet-name>AddServlet</servlet-name>-->
-<!--        <servlet-class>com.demo3.fruit.service.AddServlet</servlet-class>-->
+<!--        <servlet-class>com.demo3.fruit.servlet.AddServlet</servlet-class>-->
 <!--    </servlet>-->
 
 <!--    <servlet>-->
 <!--        <servlet-name>FindAllServlet</servlet-name>-->
-<!--        <servlet-class>com.demo3.fruit.service.FindAllServlet</servlet-class>-->
+<!--        <servlet-class>com.demo3.fruit.servlet.FindAllServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>FindAllServlet</servlet-name>-->
@@ -33,6 +41,14 @@
 <!--    </servlet-mapping>-->
 
 
+<!--    <filter>-->
+<!--        <filter-name>DemoFilter</filter-name>-->
+<!--        <filter-class>com.demo3.fruit.fliters.DemoFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>DemoFilter</filter-name>-->
+<!--        <url-pattern>/fruit.do</url-pattern>-->
+<!--    </filter-mapping>-->
 
 
 
